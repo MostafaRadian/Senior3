@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+import 'counter_provider.dart';
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int num = 0;
+class HomePage extends StatelessWidget {
+  HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var counter = Provider.of<CountProvider>(context);
+
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -29,7 +27,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "$num",
+                "${counter.count}",
                 style: const TextStyle(fontSize: 30, color: Colors.blue),
               ),
               Row(
@@ -37,8 +35,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   FloatingActionButton(
                     onPressed: () {
-                      num--;
-                      setState(() {});
+                      counter.decrement();
                     },
                     child: const Icon(Icons.remove),
                   ),
@@ -47,9 +44,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   FloatingActionButton(
                     onPressed: () {
-                      setState(() {
-                        num++;
-                      });
+                      counter.increment();
                     },
                     child: const Icon(Icons.add),
                   )
