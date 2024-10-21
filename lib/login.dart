@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:senior4/homepage.dart';
 
 class Login extends StatelessWidget {
   Login({super.key});
@@ -67,7 +68,10 @@ class Login extends StatelessWidget {
                 children: [
                   const Text("Dont have account? "),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => HomePage()));
+                    },
                     child: const Text('Signup'),
                   )
                 ],
