@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+import 'counter_provider.dart';
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int num = 0;
+class HomePage extends StatelessWidget {
+  HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,30 +24,42 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "$num",
-                style: const TextStyle(fontSize: 30, color: Colors.blue),
+              Consumer(
+                builder: (BuildContext context, CounterProvider counterObject,
+                    Widget? child) {
+                  return Text(
+                    "${counterObject.num}",
+                    style: const TextStyle(fontSize: 30, color: Colors.blue),
+                  );
+                },
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  FloatingActionButton(
-                    onPressed: () {
-                      num--;
-                      setState(() {});
+                  Consumer(
+                    builder: (BuildContext context,
+                        CounterProvider counterObject, Widget? child) {
+                      return FloatingActionButton(
+                        onPressed: () {
+                          counterObject.decrement();
+                        },
+                        child: const Icon(Icons.remove),
+                      );
                     },
-                    child: const Icon(Icons.remove),
                   ),
                   const SizedBox(
                     width: 50,
                   ),
-                  FloatingActionButton(
-                    onPressed: () {
-                      setState(() {
-                        num++;
-                      });
+                  Consumer(
+                    builder: (BuildContext context,
+                        CounterProvider counterObject, Widget? child) {
+                      return FloatingActionButton(
+                        onPressed: () {
+                          counterObject.decrement();
+                        },
+                        child: const Icon(Icons.add),
+                      );
                     },
-                    child: const Icon(Icons.add),
                   )
                 ],
               )

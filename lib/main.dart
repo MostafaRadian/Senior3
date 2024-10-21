@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'countgame.dart';
+import 'package:provider/provider.dart';
+import 'package:senior4/counter_provider.dart';
+import 'package:senior4/homepage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Countgame(),
+      home: ChangeNotifierProvider(
+        create: (BuildContext context) => CounterProvider(),
+        child: HomePage(),
+      ),
     );
   }
 }
