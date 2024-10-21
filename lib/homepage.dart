@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
                         CounterProvider counterObject, Widget? child) {
                       return FloatingActionButton(
                         onPressed: () {
-                          counterObject.decrement();
+                          counterObject.increment();
                         },
                         child: const Icon(Icons.add),
                       );
