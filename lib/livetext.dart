@@ -1,34 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class LiveText extends StatefulWidget {
-  const LiveText({super.key});
+import 'livetext_provider.dart';
 
-  @override
-  State<LiveText> createState() => _LiveTextState();
-}
-
-class _LiveTextState extends State<LiveText> {
-  String words = '';
+class LiveText extends StatelessWidget {
+  LiveText({super.key});
 
   @override
   Widget build(BuildContext context) {
+    //var pov = Provider.of<LiveTextProvider>(context);
+
     return Scaffold(
       appBar: AppBar(),
       body: Container(
         width: double.infinity,
         child: Column(
           children: [
-            TextFormField(
-              onChanged: (value) {
-                words = value;
-                setState(() {});
-              },
-              decoration: const InputDecoration(
-                labelText: "Test me",
-                border: OutlineInputBorder(),
+            Consumer(
+              builder: (context, LiveTextProvider liveObject, child) =>
+                  TextFormField(
+                onChanged: (value) {
+                  liveObject.addText(value);
+                },
+                decoration: const InputDecoration(
+                  labelText: "Test me",
+                  border: OutlineInputBorder(),
+                ),
               ),
             ),
-            Text(words),
+            Consumer(
+              builder: (BuildContext context, LiveTextProvider liveObject,
+                      Widget? child) =>
+                  Text(
+                liveObject.words,
+              ),
+            ),
             GestureDetector(
               onTap: () {},
               child: Container(

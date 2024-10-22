@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:senior4/counter_provider.dart';
-import 'package:senior4/homepage.dart';
+import 'package:senior4/livetext.dart';
+import 'package:senior4/livetext_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: ChangeNotifierProvider(
-        create: (BuildContext context) => CounterProvider(),
-        child: HomePage(),
+        create: (BuildContext context) => LiveTextProvider(),
+        child: LiveText(),
       ),
     );
   }
