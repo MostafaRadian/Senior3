@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'counter_provider.dart';
+import 'package:senior4/counter_provider.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -25,10 +24,10 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Consumer(
-                builder: (BuildContext context, CounterProvider counterObject,
+                builder: (BuildContext context, CounterProvider value,
                     Widget? child) {
                   return Text(
-                    "${counterObject.num}",
+                    "${value.num}",
                     style: const TextStyle(fontSize: 30, color: Colors.blue),
                   );
                 },
@@ -37,30 +36,28 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Consumer(
-                    builder: (BuildContext context,
-                        CounterProvider counterObject, Widget? child) {
-                      return FloatingActionButton(
-                        onPressed: () {
-                          counterObject.decrement();
-                        },
-                        child: const Icon(Icons.remove),
-                      );
-                    },
+                    builder: (BuildContext context, CounterProvider value,
+                            Widget? child) =>
+                        FloatingActionButton(
+                      onPressed: () {
+                        value.decrement();
+                      },
+                      child: const Icon(Icons.remove),
+                    ),
                   ),
                   const SizedBox(
                     width: 50,
                   ),
                   Consumer(
-                    builder: (BuildContext context,
-                        CounterProvider counterObject, Widget? child) {
-                      return FloatingActionButton(
-                        onPressed: () {
-                          counterObject.increment();
-                        },
-                        child: const Icon(Icons.add),
-                      );
-                    },
-                  )
+                    builder: (BuildContext context, CounterProvider value,
+                            Widget? child) =>
+                        FloatingActionButton(
+                      onPressed: () {
+                        value.increment();
+                      },
+                      child: const Icon(Icons.add),
+                    ),
+                  ),
                 ],
               )
             ],
