@@ -3,10 +3,10 @@ import 'package:flutter/cupertino.dart';
 class BmiProvider extends ChangeNotifier {
   bool isFemale = false;
   bool isMale = false;
-  double height = 0;
+  double height = 170;
   double bmi = 0;
-  int weight = 0;
-  int age = 0;
+  int weight = 60;
+  int age = 20;
   String resultText = '';
 
   void buttonPress(String type) {

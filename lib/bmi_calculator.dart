@@ -45,6 +45,9 @@ class _BmiPageState extends State<BmiPage> {
                       onTap: () {
                         bmiObject.buttonPress('male');
                       },
+                      onDoubleTap: () {
+                        bmiObject.restType();
+                      },
                       child: Consumer<BmiProvider>(
                         builder: (context, value, Widget? child) => Container(
                           decoration: BoxDecoration(
@@ -72,7 +75,9 @@ class _BmiPageState extends State<BmiPage> {
                       onTap: () {
                         bmiObject.buttonPress("female");
                       },
-                      onDoubleTap: () {},
+                      onDoubleTap: () {
+                        bmiObject.restType();
+                      },
                       child: Consumer(
                         builder: (BuildContext context, BmiProvider value,
                                 Widget? child) =>
@@ -118,29 +123,31 @@ class _BmiPageState extends State<BmiPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          '${height.round()}',
-                          style: const TextStyle(
-                              fontSize: 50,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
+                        Consumer<BmiProvider>(
+                          builder:
+                              (BuildContext context, value, Widget? child) =>
+                                  Text('${value.height.round()}',
+                                      style: const TextStyle(
+                                          fontSize: 50,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white)),
                         ),
                         const Text(' cm',
                             style:
                                 TextStyle(fontSize: 18, color: Colors.white)),
                       ],
                     ),
-                    Slider(
-                      value: height,
-                      min: 100,
-                      max: 251,
-                      activeColor: Colors.pink,
-                      inactiveColor: Colors.grey,
-                      onChanged: (double value) {
-                        setState(() {
-                          height = value;
-                        });
-                      },
+                    Consumer<BmiProvider>(
+                      builder: (context, obj, child) => Slider(
+                        value: obj.height,
+                        min: 100,
+                        max: 251,
+                        activeColor: Colors.pink,
+                        inactiveColor: Colors.grey,
+                        onChanged: (double value) {
+                          obj.changeSlider(value);
+                        },
+                      ),
                     ),
                   ],
                 ),
@@ -165,36 +172,35 @@ class _BmiPageState extends State<BmiPage> {
                             'Weight',
                             style: TextStyle(fontSize: 18, color: Colors.white),
                           ),
-                          Text(
-                            '$weight',
-                            style: const TextStyle(
-                                fontSize: 50,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                          Consumer<BmiProvider>(
+                            builder: (BuildContext context, BmiProvider value,
+                                    Widget? child) =>
+                                Text(
+                              '${value.weight}',
+                              style: const TextStyle(
+                                  fontSize: 50,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               FloatingActionButton(
-                                heroTag: 'weight--',
-                                backgroundColor: Colors.grey[600],
-                                child: const Icon(Icons.remove,
-                                    color: Colors.white),
-                                onPressed: () {
-                                  setState(() {
-                                    weight--;
-                                  });
-                                },
-                              ),
+                                  heroTag: 'weight--',
+                                  backgroundColor: Colors.grey[600],
+                                  child: const Icon(Icons.remove,
+                                      color: Colors.white),
+                                  onPressed: () {
+                                    bmiObject.removeValue('weight');
+                                  }),
                               const SizedBox(width: 10),
                               FloatingActionButton(
                                 backgroundColor: Colors.grey[600],
                                 child:
                                     const Icon(Icons.add, color: Colors.white),
                                 onPressed: () {
-                                  setState(() {
-                                    weight++;
-                                  });
+                                  bmiObject.addValue('weight');
                                 },
                               ),
                             ],
@@ -217,12 +223,16 @@ class _BmiPageState extends State<BmiPage> {
                             'Age',
                             style: TextStyle(fontSize: 18, color: Colors.white),
                           ),
-                          Text(
-                            '$age',
-                            style: const TextStyle(
-                              fontSize: 50,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                          Consumer<BmiProvider>(
+                            builder: (BuildContext context, BmiProvider value,
+                                    Widget? child) =>
+                                Text(
+                              '${value.age}',
+                              style: const TextStyle(
+                                fontSize: 50,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                           Row(
