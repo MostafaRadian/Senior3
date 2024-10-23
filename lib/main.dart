@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:senior4/gesture_provider.dart';
 
-import 'bmi_calculator.dart';
+import 'gesture.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +20,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const BmiPage(),
+      home: ChangeNotifierProvider(
+        create: (BuildContext context) => GestureProvider(),
+        child: GesturePage(),
+      ),
     );
   }
 }
