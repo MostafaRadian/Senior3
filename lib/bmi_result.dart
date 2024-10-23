@@ -16,7 +16,8 @@ class BmiResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BMI Calculator'),
+        title:
+            const Text('BMI Calculator', style: TextStyle(color: Colors.white)),
         centerTitle: true,
         backgroundColor: const Color(0xFF111328),
       ),
@@ -30,7 +31,10 @@ class BmiResultPage extends StatelessWidget {
               child: Center(
                 child: Text(
                   'Your Result',
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
               ),
             ),
@@ -56,13 +60,19 @@ class BmiResultPage extends StatelessWidget {
                     Text(
                       bmi.toStringAsFixed(1),
                       style: const TextStyle(
-                          fontSize: 80, fontWeight: FontWeight.bold),
+                        fontSize: 80,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                     const SizedBox(height: 20),
                     Text(
                       interpretation,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 18),
+                      style: const TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),

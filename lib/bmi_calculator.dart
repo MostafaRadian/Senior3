@@ -19,8 +19,13 @@ class _BmiPageState extends State<BmiPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BMI Calculator'),
+        title: const Text(
+          'BMI Calculator',
+          style: TextStyle(color: Colors.white),
+        ),
+        elevation: 0.0,
         centerTitle: true,
+        backgroundColor: const Color(0xFF111328),
       ),
       body: Container(
         padding: const EdgeInsets.all(16.0),
@@ -115,13 +120,15 @@ class _BmiPageState extends State<BmiPage> {
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
-                        const Text(' cm', style: TextStyle(fontSize: 18)),
+                        const Text(' cm',
+                            style:
+                                TextStyle(fontSize: 18, color: Colors.white)),
                       ],
                     ),
                     Slider(
                       value: height,
                       min: 100,
-                      max: 220,
+                      max: 251,
                       activeColor: Colors.pink,
                       inactiveColor: Colors.grey,
                       onChanged: (double value) {
