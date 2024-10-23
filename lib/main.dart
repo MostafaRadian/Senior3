@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:senior4/counter_provider.dart';
-import 'package:senior4/homepage.dart';
+
+import 'bmi_calculator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,10 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: ChangeNotifierProvider(
-        create: (context) => CounterProvider(),
-        child: HomePage(),
-      ),
+      home: const BmiPage(),
     );
   }
 }
