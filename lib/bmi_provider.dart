@@ -1,19 +1,28 @@
 import 'package:flutter/cupertino.dart';
 
 class BmiProvider extends ChangeNotifier {
-  bool isPressed = false;
+  bool isFemale = false;
   bool isMale = false;
-
   double height = 0;
+  double bmi = 0;
   int weight = 0;
   int age = 0;
-  double bmi = 0;
   String resultText = '';
 
-  void buttonPress() {
-    isPressed = !isPressed;
-    isMale = !isMale;
+  void buttonPress(String type) {
+    if (type == "male") {
+      isMale = true;
+      isFemale = false;
+    } else if (type == 'female') {
+      isMale = false;
+      isFemale = true;
+    }
+    notifyListeners();
+  }
 
+  void restType() {
+    isMale = false;
+    isFemale = false;
     notifyListeners();
   }
 

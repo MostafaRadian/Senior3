@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:senior4/bmi_provider.dart';
 
 import 'bmi_result.dart';
 
@@ -17,6 +19,8 @@ class _BmiPageState extends State<BmiPage> {
 
   @override
   Widget build(BuildContext context) {
+    BmiProvider bmiObject = Provider.of<BmiProvider>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -39,26 +43,25 @@ class _BmiPageState extends State<BmiPage> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        setState(() {
-                          selectedGender = 1; // Male selected
-                        });
+                        bmiObject.buttonPress('male');
                       },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: selectedGender == 1
-                              ? Colors.blue
-                              : Colors.grey[800],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.male, size: 80, color: Colors.white),
-                            SizedBox(height: 15),
-                            Text('Male',
-                                style: TextStyle(
-                                    fontSize: 18, color: Colors.white)),
-                          ],
+                      child: Consumer<BmiProvider>(
+                        builder: (context, value, Widget? child) => Container(
+                          decoration: BoxDecoration(
+                            color:
+                                value.isMale ? Colors.blue : Colors.grey[800],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.male, size: 80, color: Colors.white),
+                              SizedBox(height: 15),
+                              Text('Male',
+                                  style: TextStyle(
+                                      fontSize: 18, color: Colors.white)),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -67,26 +70,28 @@ class _BmiPageState extends State<BmiPage> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        setState(() {
-                          selectedGender = 2; // Female selected
-                        });
+                        bmiObject.buttonPress("female");
                       },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: selectedGender == 2
-                              ? Colors.pink
-                              : Colors.grey[800],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.female, size: 80, color: Colors.white),
-                            SizedBox(height: 15),
-                            Text('Female',
-                                style: TextStyle(
-                                    fontSize: 18, color: Colors.white)),
-                          ],
+                      onDoubleTap: () {},
+                      child: Consumer(
+                        builder: (BuildContext context, BmiProvider value,
+                                Widget? child) =>
+                            Container(
+                          decoration: BoxDecoration(
+                            color:
+                                value.isFemale ? Colors.pink : Colors.grey[800],
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.female, size: 80, color: Colors.white),
+                              SizedBox(height: 15),
+                              Text('Female',
+                                  style: TextStyle(
+                                      fontSize: 18, color: Colors.white)),
+                            ],
+                          ),
                         ),
                       ),
                     ),
