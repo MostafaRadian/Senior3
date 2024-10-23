@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:senior4/gesture_provider.dart';
-
-import 'gesture.dart';
+import 'package:senior4/bmi_calculator.dart';
+import 'package:senior4/game_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,8 +20,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: ChangeNotifierProvider(
-        create: (BuildContext context) => GestureProvider(),
-        child: GesturePage(),
+        create: (BuildContext context) => GameProvider(),
+        child: BmiPage(),
       ),
     );
   }

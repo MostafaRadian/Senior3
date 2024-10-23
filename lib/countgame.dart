@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class Countgame extends StatefulWidget {
-  const Countgame({super.key});
+import 'game_provider.dart';
 
-  @override
-  State<Countgame> createState() => _CountgameState();
-}
-
-class _CountgameState extends State<Countgame> {
-  int countA = 0, countB = 0;
-
+class Countgame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    GameProvider gameObject = Provider.of<GameProvider>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orange,
@@ -32,30 +28,31 @@ class _CountgameState extends State<Countgame> {
                       "Team A",
                       style: TextStyle(fontSize: 40),
                     ),
-                    Text(
-                      "$countA",
-                      style: TextStyle(fontSize: 35),
+                    Consumer(
+                      builder: (BuildContext context, GameProvider value,
+                              Widget? child) =>
+                          Text(
+                        "${value.countA}",
+                        style: TextStyle(fontSize: 35),
+                      ),
                     ),
                     MaterialButton(
                       onPressed: () {
-                        countA++;
-                        setState(() {});
+                        gameObject.addA(value: 1);
                       },
                       color: Colors.orange,
                       child: const Text("Add 1 point"),
                     ),
                     MaterialButton(
                       onPressed: () {
-                        countA += 2;
-                        setState(() {});
+                        gameObject.addA(value: 2);
                       },
                       color: Colors.orange,
                       child: const Text("Add 2 point"),
                     ),
                     MaterialButton(
                       onPressed: () {
-                        countA += 3;
-                        setState(() {});
+                        gameObject.addA(value: 3);
                       },
                       color: Colors.orange,
                       child: const Text("Add 3 point"),
@@ -73,30 +70,30 @@ class _CountgameState extends State<Countgame> {
                       "Team B",
                       style: TextStyle(fontSize: 40),
                     ),
-                    Text(
-                      "$countB",
-                      style: const TextStyle(fontSize: 35),
+                    Consumer<GameProvider>(
+                      builder: (BuildContext context, value, Widget? child) =>
+                          Text(
+                        "${value.countB}",
+                        style: const TextStyle(fontSize: 35),
+                      ),
                     ),
                     MaterialButton(
                       onPressed: () {
-                        countB++;
-                        setState(() {});
+                        gameObject.addB(value: 1);
                       },
                       color: Colors.orange,
                       child: Text("Add 1 point"),
                     ),
                     MaterialButton(
                       onPressed: () {
-                        countB += 2;
-                        setState(() {});
+                        gameObject.addB(value: 2);
                       },
                       color: Colors.orange,
                       child: const Text("Add 2 point"),
                     ),
                     MaterialButton(
                       onPressed: () {
-                        countB += 3;
-                        setState(() {});
+                        gameObject.addB(value: 3);
                       },
                       color: Colors.orange,
                       child: const Text("Add 3 point"),
@@ -107,9 +104,7 @@ class _CountgameState extends State<Countgame> {
             ),
             MaterialButton(
               onPressed: () {
-                countA = 0;
-                countB = 0;
-                setState(() {});
+                gameObject.resetAB();
               },
               color: Colors.orange,
               child: const Text("Reset"),
